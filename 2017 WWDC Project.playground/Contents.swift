@@ -16,7 +16,7 @@ import AVFoundation
  
  */
 
-let gameDuration = 30.0
+let gameDuration = 50.0
 
 
 
@@ -300,14 +300,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let teaneckNode = SKLabelNode(text: "Teaneck")
         teaneckNode.fontSize = 20
         teaneckNode.fontName = ".SFUIText"
-        teaneckNode.position = CGPoint(x: 50, y: 25)
+        teaneckNode.position = CGPoint(x: 50, y: 23)
         teaneckNode.fontColor = UIColor.black
         self.addChild(teaneckNode)
         
         let sanJoseNode = SKLabelNode(text: "San Jose")
         sanJoseNode.fontSize = 20
         sanJoseNode.fontName = ".SFUIText"
-        sanJoseNode.position = CGPoint(x: self.frame.width - 50, y: 25)
+        sanJoseNode.position = CGPoint(x: self.frame.width - 50, y: 23)
         sanJoseNode.fontColor = UIColor.black
         self.addChild(sanJoseNode)
         
@@ -596,7 +596,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func dropEmployee() {
         
         
-        let employeeTextures = [SKTexture(image: #imageLiteral(resourceName: "Group2.png")),SKTexture(image: #imageLiteral(resourceName: "jonyIve.png"))]
+        let employeeTextures = [SKTexture(image: #imageLiteral(resourceName: "timCook.png")),SKTexture(image: #imageLiteral(resourceName: "jonyIve.png")),SKTexture(image: #imageLiteral(resourceName: "craigFederighi.png")),SKTexture(image: #imageLiteral(resourceName: "angelaAhrendts.png")),SKTexture(image: #imageLiteral(resourceName: "philSchiller.png"))]
         let employee = SKSpriteNode(texture: employeeTextures[employeesDropped % employeeTextures.count])
         
         employee.physicsBody = SKPhysicsBody(circleOfRadius: employee.frame.size.width/2)
@@ -615,7 +615,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func launchMac() {
         
         
-        let macTextures = [SKTexture(image: #imageLiteral(resourceName: "mac1.png")),SKTexture(image: #imageLiteral(resourceName: "mac2.png")),SKTexture(image: #imageLiteral(resourceName: "mac3.png")),SKTexture(image: #imageLiteral(resourceName: "mac4.png")),SKTexture(image: #imageLiteral(resourceName: "mac5.png")),SKTexture(image: #imageLiteral(resourceName: "mac6.png")),SKTexture(image: #imageLiteral(resourceName: "mac7.png")),SKTexture(image: #imageLiteral(resourceName: "mac8.png")),SKTexture(image: #imageLiteral(resourceName: "mac9.png")),SKTexture(image: #imageLiteral(resourceName: "mac10.png")),SKTexture(image: #imageLiteral(resourceName: "mac11.png")),SKTexture(image: #imageLiteral(resourceName: "mac13.png")),SKTexture(image: #imageLiteral(resourceName: "mac13.png"))]
+        let macTextures = [SKTexture(image: #imageLiteral(resourceName: "mac1.png")),SKTexture(image: #imageLiteral(resourceName: "mac2.png")),SKTexture(image: #imageLiteral(resourceName: "mac3.png")),SKTexture(image: #imageLiteral(resourceName: "mac4.png")),SKTexture(image: #imageLiteral(resourceName: "mac5.png")),SKTexture(image: #imageLiteral(resourceName: "mac6.png")),SKTexture(image: #imageLiteral(resourceName: "mac7.png")),SKTexture(image: #imageLiteral(resourceName: "mac8.png")),SKTexture(image: #imageLiteral(resourceName: "mac9.png")),SKTexture(image: #imageLiteral(resourceName: "mac10.png")),SKTexture(image: #imageLiteral(resourceName: "mac11.png")),SKTexture(image: #imageLiteral(resourceName: "mac13.png")),SKTexture(image: #imageLiteral(resourceName: "mac12.png"))]
         
         let macNode = SKSpriteNode(texture: macTextures[macCounter])
         
