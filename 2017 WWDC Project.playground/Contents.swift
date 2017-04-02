@@ -7,16 +7,13 @@ import AVFoundation
 
 /* Things left to do
  * 
- * Stop game upon winning
- * Show Percentages
- * Add falling apple employees
- * Make Mac fly from random locations
+
  
  * Maybe set mac aspect ratios so they look better
  
  */
 
-let gameDuration = 50.0
+let gameDuration = 52.0
 
 
 
@@ -37,6 +34,8 @@ let view3 = SKView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
 
 ///Valiable is updated when the user looses
 var userLost = false
+
+var userWon = false
 
 //Number of employees caught
 var employeesCaught = 0
@@ -326,7 +325,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             percentageLabel.addOnePercent()
             progressBar.frame.size.width = CGFloat(percentageLabel.percent)/100.0 * 292.0
-            print(CGFloat(percentageLabel.percent)/100.0 * 292.0)
+            //print(CGFloat(percentageLabel.percent)/100.0 * 292.0)
 
             if percentageLabel.percent == 100 || userLost {
                 timer.invalidate()
@@ -336,6 +335,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if percentageLabel.percent == 100 {
                     //user won
+                    userWon = true
+                    
                     let backgroundNode = SKNode()
                     
                     
@@ -450,7 +451,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print("Contact")
+        //print("Contact")
         if contact.bodyA.categoryBitMask == category3 {
             contact.bodyB.node?.removeFromParent()
         }
@@ -460,18 +461,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if (contact.bodyA.categoryBitMask == category && contact.bodyB.categoryBitMask == category2) {
             //BodyA is plane
             //BodyB is danger
-            print("Danger and Plane collision")
-            contact.bodyB.node?.removeFromParent()
-            contact.bodyA.node?.removeFromParent()
-            blowUpAirplane()
+            
+            
+            
+            //Only lose if didnt win yet
+            if !userWon {
+                blowUpAirplane()
+                
+                print("Danger and Plane collision")
+                contact.bodyB.node?.removeFromParent()
+                contact.bodyA.node?.removeFromParent()
+            }
+
         }
         else if (contact.bodyA.categoryBitMask == category2 && contact.bodyB.categoryBitMask == category) {
             //BodyA is danger
             //BodyB is Plane
-            contact.bodyA.node?.removeFromParent()
             
-            contact.bodyB.node?.removeFromParent()
-            blowUpAirplane()
+            
+            
+            //Only lose if didnt win yet
+            if !userWon {
+                blowUpAirplane()
+                
+                contact.bodyA.node?.removeFromParent()
+                
+                contact.bodyB.node?.removeFromParent()
+            }
         }
         
         else if (contact.bodyA.categoryBitMask == employeeCategory && contact.bodyB.categoryBitMask == category) {
@@ -615,11 +631,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func launchMac() {
         
         
-        let macTextures = [SKTexture(image: #imageLiteral(resourceName: "mac1.png")),SKTexture(image: #imageLiteral(resourceName: "mac2.png")),SKTexture(image: #imageLiteral(resourceName: "mac3.png")),SKTexture(image: #imageLiteral(resourceName: "mac4.png")),SKTexture(image: #imageLiteral(resourceName: "mac5.png")),SKTexture(image: #imageLiteral(resourceName: "mac6.png")),SKTexture(image: #imageLiteral(resourceName: "mac7.png")),SKTexture(image: #imageLiteral(resourceName: "mac8.png")),SKTexture(image: #imageLiteral(resourceName: "mac9.png")),SKTexture(image: #imageLiteral(resourceName: "mac10.png")),SKTexture(image: #imageLiteral(resourceName: "mac11.png")),SKTexture(image: #imageLiteral(resourceName: "mac13.png")),SKTexture(image: #imageLiteral(resourceName: "mac12.png"))]
+        let macTextures = [SKTexture(image:#imageLiteral(resourceName: "mac1.png")),SKTexture(image:#imageLiteral(resourceName: "mac2.png")),SKTexture(image:#imageLiteral(resourceName: "mac3.png")),SKTexture(image:#imageLiteral(resourceName: "mac4.png")),SKTexture(image:#imageLiteral(resourceName: "mac5.png")),SKTexture(image:#imageLiteral(resourceName: "mac6.png")),SKTexture(image: #imageLiteral(resourceName: "mac7.png")),SKTexture(image: #imageLiteral(resourceName: "mac8.png")),SKTexture(image: #imageLiteral(resourceName: "mac9.png")),SKTexture(image:#imageLiteral(resourceName: "mac10.png")),SKTexture(image: #imageLiteral(resourceName: "mac11.png")),SKTexture(image: #imageLiteral(resourceName: "mac12.png")),SKTexture(image:#imageLiteral(resourceName: "mac13.png"))]
         
         let macNode = SKSpriteNode(texture: macTextures[macCounter])
         
-        macNode.size = CGSize(width: 70, height: 50)
+        //macNode.size = CGSize(width: 70, height: 50)
         macNode.physicsBody = SKPhysicsBody(circleOfRadius: macNode.frame.size.width/2)
         //macNode.physicsBody?.mass = 100000000000000
         
